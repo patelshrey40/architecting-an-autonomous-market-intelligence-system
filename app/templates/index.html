@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page_title }}</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Roundtable &amp; Advisory recruiter demo</p>
+        <h1>{{ page_title }}</h1>
+        <p class="subtitle">{{ page_subtitle }}</p>
+        <p class="hero-note">
+          This is a focused demo of the first valuable slice: source governance, deterministic
+          market scoring, property DNA, and summit targeting for Newark and Jersey City.
+        </p>
+      </div>
+      <div class="hero-callout">
+        <p class="callout-label">Design principle</p>
+        <p class="callout-value">Agents investigate. Code decides what gets committed.</p>
+      </div>
+    </header>
+
+    <section class="summary-grid" id="summaryGrid"></section>
+
+    <section class="card">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">Pipeline status</p>
+          <h2>What the demo covers</h2>
+        </div>
+      </div>
+      <div class="phase-grid" id="phaseGrid"></div>
+    </section>
+
+    <section class="card">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">Market footprint</p>
+          <h2>Newark and Jersey City intelligence map</h2>
+        </div>
+      </div>
+      <div class="market-layout">
+        <div class="map-panel">
+          <svg id="marketMap" viewBox="0 0 900 420" role="img" aria-label="Seeded property map"></svg>
+          <div class="map-legend" id="mapLegend"></div>
+        </div>
+        <aside class="detail-panel" id="propertyDetail">
+          <p class="muted">Select a property to inspect its DNA chain.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="grid-two">
+      <section class="card">
+        <div class="section-heading compact">
+          <div>
+            <p class="section-kicker">Cities</p>
+            <h2>Coverage snapshot</h2>
+          </div>
+        </div>
+        <div class="city-summary-list" id="citySummaryList"></div>
+      </section>
+
+      <section class="card">
+        <div class="section-heading compact">
+          <div>
+            <p class="section-kicker">Scoring engine</p>
+            <h2>Priority tiers</h2>
+          </div>
+        </div>
+        <div class="tier-list">
+          <div><span>Tier 1</span><strong>80-100</strong><p>Immediate ownership and people enrichment.</p></div>
+          <div><span>Tier 2</span><strong>60-79</strong><p>High-value batch enrichment candidates.</p></div>
+          <div><span>Tier 3</span><strong>40-59</strong><p>Keep in the graph, enrich lightly.</p></div>
+          <div><span>Tier 4</span><strong>&lt;40</strong><p>Foundation only, no active enrichment yet.</p></div>
+        </div>
+      </section>
+    </section>
+
+    <section class="card">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">Properties</p>
+          <h2>Top recruiter demo properties</h2>
+        </div>
+      </div>
+      <div class="table-shell">
+        <table>
+          <thead>
+            <tr>
+              <th>Property</th>
+              <th>City</th>
+              <th>Class</th>
+              <th>Tier</th>
+              <th>Priority</th>
+              <th>Owner</th>
+            </tr>
+          </thead>
+          <tbody id="propertyTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">Summit targeting</p>
+          <h2>Who should be in the room</h2>
+        </div>
+      </div>
+      <div class="target-grid" id="targetGrid"></div>
+    </section>
+
+    <section class="card">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">Governance</p>
+          <h2>Approved vs restricted sources</h2>
+        </div>
+      </div>
+      <div class="source-grid" id="sourceGrid"></div>
+    </section>
+  </div>
+
+  <script src="/static/app.js" defer></script>
+</body>
+</html>

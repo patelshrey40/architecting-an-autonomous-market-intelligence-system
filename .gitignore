@@ -1,0 +1,8 @@
+.DS_Store
+.pytest_cache/
+.coverage
+__pycache__/
+*.pyc
+.venv/
+dist/
+build/
