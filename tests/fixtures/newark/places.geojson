@@ -1,0 +1,38 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "ovr-place-1",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-74.1884, 40.7319]
+      },
+      "properties": {
+        "name": "Broad Coffee"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ovr-place-2",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-74.1838, 40.7318]
+      },
+      "properties": {
+        "name": "Broad Gym"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ovr-place-3",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-74.1833, 40.7328]
+      },
+      "properties": {
+        "name": "Broad Market"
+      }
+    }
+  ]
+}

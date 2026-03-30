@@ -1,0 +1,71 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-74.1900, 40.7300],
+            [-74.1860, 40.7300],
+            [-74.1860, 40.7340],
+            [-74.1900, 40.7340],
+            [-74.1900, 40.7300]
+          ]
+        ]
+      },
+      "properties": {
+        "PAMS_PIN": "0701-0001",
+        "COUNTY": "Essex",
+        "MUN_NAME": "Newark",
+        "PCLBLOCK": "701",
+        "PCLLOT": "1",
+        "PCLQCODE": "",
+        "PROP_LOC": "100 Broad St",
+        "PROP_CLASS": "4A",
+        "PROP_USE": "4A",
+        "LAND_DESC": "Commercial",
+        "LAND_VAL": 5000000,
+        "IMPRVT_VAL": 12500000,
+        "SALE_PRICE": 17500000,
+        "DEED_DATE": "120125",
+        "YR_CONSTR": 1988,
+        "CALC_ACRE": 0.75
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-74.1858, 40.7302],
+            [-74.1816, 40.7302],
+            [-74.1816, 40.7342],
+            [-74.1858, 40.7342],
+            [-74.1858, 40.7302]
+          ]
+        ]
+      },
+      "properties": {
+        "PAMS_PIN": "0701-0002",
+        "COUNTY": "Essex",
+        "MUN_NAME": "Newark",
+        "PCLBLOCK": "701",
+        "PCLLOT": "2",
+        "PCLQCODE": "",
+        "PROP_LOC": "110 Broad St",
+        "PROP_CLASS": "4C",
+        "PROP_USE": "4C",
+        "LAND_DESC": "Apartments",
+        "LAND_VAL": 3200000,
+        "IMPRVT_VAL": 9600000,
+        "SALE_PRICE": 12000000,
+        "DEED_DATE": "110124",
+        "YR_CONSTR": 2005,
+        "CALC_ACRE": 0.68
+      }
+    }
+  ]
+}

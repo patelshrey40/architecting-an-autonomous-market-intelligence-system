@@ -1,93 +1,135 @@
 # Architecting an Autonomous Market Intelligence System
 
-This repository is a deliberately scoped demo of the larger roadmap in `Technical solution - AI solution analyst.docx`.
+This repository now implements the Newark real-data foundation slice plus a narrow ownership demo from the larger roadmap.
 
-It does not try to build the entire production pipeline. It builds the first recruiter-friendly slice that proves the thinking:
+The app no longer runs on seeded parcel, people, or summit-target data. It focuses on the first real-data layer:
 
-- a governed source registry that separates allowed, restricted, and validation-only data sources
-- a deterministic scoring engine for Newark and Jersey City properties
-- a provenance-aware claim graph for ownership, officers, lenders, and projects
-- a summit targeting view that ranks who matters based on property control, civic influence, and prior event overlap
+- official Newark parcel and MOD-IV data from NJGIN
+- official Newark place boundary validation from Census TIGER
+- Overture buildings, addresses, and places
+- Essex County recorder owner-of-record enrichment
+- NJ business search matching for owner entity summaries
+- PostGIS spatial joins and deterministic scoring
+- a Leaflet + OpenStreetMap map UI backed by FastAPI APIs
 
-## Why this repo exists
+## What this phase ships
 
-The original document is a 6-phase technical architecture for a real estate market intelligence system. A recruiter does not need the full production build to understand the quality of the architecture. They need a clean demo that shows:
+- repeatable ingest command: `python -m app.cli ingest-newark`
+- repeatable ownership enrichment command: `python -m app.cli enrich-newark-ownership --top-n 50`
+- Docker Compose stack with Postgres 16 + PostGIS and the FastAPI app
+- database-backed Newark APIs
+- real-data-only Newark UI with:
+  - summary KPI cards
+  - interactive parcel map
+  - parcel table for the current viewport
+  - parcel detail drawer with score breakdown, ownership, and source provenance
 
-1. the ontology is structured
-2. the legal and source-governance concerns were taken seriously
-3. the scoring logic is deterministic where it should be
-4. the product can turn parcel intelligence into a ranked contact list
+## Data sources
 
-That is what this repo ships.
+- [NJGIN Parcels and MOD-IV Composite](https://nj.gov/njgin/edata/parcels/index.html)
+- [Census TIGER/Line geodatabases](https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-geodatabase-file.2025.html)
+- [Overture Maps Python Client](https://docs.overturemaps.org/getting-data/overturemaps-py/)
+- [OpenStreetMap tile policy](https://operations.osmfoundation.org/policies/tiles/)
 
-## What the demo includes
+## Current scope
 
-- `app/demo_data.py`
-  Seeded Newark and Jersey City data for parcels, organizations, people, projects, source documents, and claims.
-- `app/pipeline.py`
-  Deterministic classification, priority scoring, claim generation, and summit target ranking.
-- `app/main.py`
-  FastAPI app exposing a lightweight dashboard and JSON endpoints.
-- `schema/postgres.sql`
-  Production-oriented Postgres/PostGIS schema for the real system.
-- `.github/workflows/ci.yml`
-  CI that runs unit tests and compiles the Python source.
+This phase is intentionally limited to Newark foundation data.
 
-## Demo architecture
+Included:
 
-```mermaid
-flowchart LR
-    A["Seeded source registry"] --> B["Deterministic pipeline"]
-    B --> C["Property scoring + tiering"]
-    B --> D["Claim graph"]
-    D --> E["Property DNA view"]
-    C --> F["Summit targeting engine"]
-    D --> F
+- parcels
+- buildings
+- addresses
+- place density
+- classification
+- deterministic scoring
+- owner-of-record deed summaries
+- NJ entity summary matching
+- QA checks
+- provenance records
+
+Not included yet:
+
+- entity resolution
+- people/contact enrichment
+- summit targeting
+- public deployment
+
+## Run locally
+
+### 1. Start PostGIS
+
+```bash
+docker compose up -d db
 ```
 
-## Local run
+### 2. Install Python dependencies
 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+```
+
+### 3. Ingest Newark data
+
+```bash
+python -m app.cli ingest-newark
+```
+
+The command caches source downloads under `.data/raw` and reuses them on later runs.
+
+### 4. Start the app
+
+```bash
 uvicorn app.main:app --reload
 ```
 
 Then open `http://127.0.0.1:8000`.
 
+### 5. Enrich top Newark ownership targets
+
+```bash
+python -m app.cli enrich-newark-ownership --top-n 50
+```
+
+This stores owner-of-record deed summaries for the top Newark Tier 1 parcels and lets the UI open the ownership drawer instantly for those parcels. The ownership endpoint will also enrich a selected parcel on demand if it has not been enriched yet.
+
+## Docker-first run
+
+```bash
+docker compose up -d db
+docker compose run --rm app python -m app.cli ingest-newark
+docker compose up app
+```
+
 ## API endpoints
 
-- `GET /api/demo`
-- `GET /api/properties`
-- `GET /api/properties/{property_id}`
-- `GET /api/targets`
-- `GET /api/sources`
+- `GET /api/newark/summary`
+- `GET /api/newark/parcels?bbox=minLon,minLat,maxLon,maxLat&classification=&tier=&q=&min_value=`
+- `GET /api/newark/buildings?bbox=minLon,minLat,maxLon,maxLat`
+- `GET /api/newark/parcels/{parcel_id}`
+- `GET /api/newark/parcels/{parcel_id}/ownership`
 - `GET /healthz`
 
-## What the recruiter should notice
+## Tests
 
-- The source registry makes it explicit that Google Places is validation-only and LoopNet / LinkedIn are not scraped.
-- Property class codes drive the first classification pass instead of letting an LLM guess obvious facts.
-- Priority scoring is transparent and broken into assessed value, class relevance, permit activity, corridor importance, transit proximity, and network overlap.
-- Every ownership or financing relationship is backed by a source document and confidence tier.
-- The targeting layer connects properties to humans, which is the actual business outcome for summits.
+```bash
+python -m unittest discover -s tests -v
+```
 
-## Production path after this demo
+What is covered:
 
-The production roadmap still follows the original document:
+- NJ class-code mapping and score formulas
+- API bbox parsing and GeoJSON serialization
+- fixture-based Newark ingest parsing
+- Essex recorder and NJ business search parser coverage
+- ownership enrichment fixture and endpoint coverage
+- PostGIS integration test using tiny checked-in fixtures when a database is available
 
-- move seeded data into Postgres 16 + PostGIS
-- replace seed adapters with NJGIN, Overture, recorder, and registry adapters
-- add Celery for async enrichment tasks
-- add LangGraph for ownership-chain investigation and messy document workflows
-- add a real frontend and vector tiles once live spatial data is flowing
+## Notes on the map
 
-## Intentional shortcuts in this repo
-
-- The dataset is seeded instead of downloaded live.
-- The UI is dependency-light and served directly from FastAPI.
-- There is no Celery worker, Redis, or LangGraph runtime in the demo.
-- The schema file is production-facing, while the running demo uses in-memory compiled state for portability.
-
-That tradeoff is intentional. The goal of this repository is to be easy to run, easy to review, and strong enough to demonstrate systems thinking quickly.
+- Parcel polygons are fetched for the current map viewport only.
+- Building footprints load automatically at higher zoom.
+- OpenStreetMap attribution is always displayed.
+- This is a low-volume local demo implementation. If the app becomes public, the tile strategy should be revisited.

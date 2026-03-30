@@ -1,0 +1,49 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "ovr-building-1",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-74.1894, 40.7305],
+            [-74.1865, 40.7305],
+            [-74.1865, 40.7334],
+            [-74.1894, 40.7334],
+            [-74.1894, 40.7305]
+          ]
+        ]
+      },
+      "properties": {
+        "height": 48,
+        "names": {
+          "primary": "Broad Street Offices"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ovr-building-2",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-74.1852, 40.7307],
+            [-74.1820, 40.7307],
+            [-74.1820, 40.7337],
+            [-74.1852, 40.7337],
+            [-74.1852, 40.7307]
+          ]
+        ]
+      },
+      "properties": {
+        "height": 36,
+        "names": {
+          "primary": "Broad Street Apartments"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-74.1885, 40.7345]
+      },
+      "properties": {
+        "OBJECTID": 1,
+        "STATION": "Washington Street",
+        "RAIL_LINE": "NEWARK LIGHT RAIL",
+        "MUNICIPALI": "NEWARK",
+        "COUNTY": "ESSEX",
+        "ATIS_ID": "LIGHT0001"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-74.1649, 40.7348]
+      },
+      "properties": {
+        "OBJECTID": 2,
+        "STATION_ID": "Newark Penn Station",
+        "RAIL_ID": "Northeast Corridor",
+        "LOCATION": "Newark",
+        "COUNTY": "ESSEX",
+        "ATIS_ID": "RAIL1000"
+      }
+    }
+  ]
+}

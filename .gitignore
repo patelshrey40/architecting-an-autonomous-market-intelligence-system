@@ -6,3 +6,5 @@ __pycache__/
 .venv/
 dist/
 build/
+.data/raw/
+.data/tmp/

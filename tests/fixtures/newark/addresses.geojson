@@ -1,0 +1,27 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "ovr-address-1",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-74.1879, 40.7320]
+      },
+      "properties": {
+        "freeform": "100 Broad St, Newark, NJ"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ovr-address-2",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-74.1836, 40.7321]
+      },
+      "properties": {
+        "freeform": "110 Broad St, Newark, NJ"
+      }
+    }
+  ]
+}

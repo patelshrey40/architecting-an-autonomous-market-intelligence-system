@@ -1,5 +1,48 @@
 services:
+  db:
+    image: postgis/postgis:16-3.4
+    environment:
+      POSTGRES_DB: market_intel
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
   app:
     build: .
+    depends_on:
+      - db
+      - redis
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/market_intel
+      REDIS_URL: redis://redis:6379/0
+      DATA_DIR: /app/.data
+      MARKET_INTEL_HOST: 0.0.0.0
+      MARKET_INTEL_PORT: 8000
     ports:
       - "8000:8000"
+    volumes:
+      - .:/app
+
+  worker:
+    build: .
+    depends_on:
+      - db
+      - redis
+    command: ["celery", "-A", "app.tasks.celery_app", "worker", "--loglevel=INFO"]
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/market_intel
+      REDIS_URL: redis://redis:6379/0
+      DATA_DIR: /app/.data
+    volumes:
+      - .:/app
+
+volumes:
+  postgres_data:

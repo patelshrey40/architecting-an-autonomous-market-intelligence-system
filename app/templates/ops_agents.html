@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page_title }}</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Agent operations</p>
+        <h1>{{ page_title }}</h1>
+        <p class="subtitle">{{ page_subtitle }}</p>
+        <p class="hero-note">
+          This surface is for swarm inspection and review. It shows task fanout, artifacts, proposals,
+          deterministic validations, and review state without changing the public Newark parcel explorer.
+        </p>
+      </div>
+      <div class="hero-callout">
+        <p class="callout-label">Runtime model</p>
+        <p class="callout-value">Worker tasks investigate, the master adjudicates, and the promotion gateway decides what lands in serving tables.</p>
+      </div>
+    </header>
+
+    <section class="card">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">Swarm runs</p>
+          <h2>Swarm control plane</h2>
+        </div>
+        <p class="muted" id="opsStatus">Loading agent runs…</p>
+      </div>
+
+      <div class="filters-row ops-filters">
+        <label>
+          Workflow
+          <select id="workflowFilter">
+            <option value="">All</option>
+            <option value="newark_parcel_ownership_v1">Ownership</option>
+            <option value="newark_lead_synthesis_v1">Lead synthesis</option>
+            <option value="newark_contact_enrichment_v1">Contact enrichment</option>
+          </select>
+        </label>
+        <label>
+          Status
+          <select id="runStatusFilter">
+            <option value="">All</option>
+            <option value="queued">Queued</option>
+            <option value="in_progress">In progress</option>
+            <option value="completed">Completed</option>
+            <option value="failed">Failed</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+        </label>
+        <label>
+          Review
+          <select id="reviewStateFilter">
+            <option value="">All</option>
+            <option value="pending">Pending</option>
+            <option value="approved">Approved</option>
+            <option value="rejected">Rejected</option>
+            <option value="not_required">Not required</option>
+          </select>
+        </label>
+        <label class="search-filter">
+          Entity ID
+          <input id="entityFilter" type="search" placeholder="parcel-0701-0001 or newark">
+        </label>
+        <label>
+          Persona
+          <select id="personaFilter">
+            <option value="">All</option>
+            <option value="lead">Lead</option>
+            <option value="person">Person</option>
+          </select>
+        </label>
+        <label>
+          Promotion
+          <select id="promotionStateFilter">
+            <option value="">All</option>
+            <option value="lead_generation">Lead generation</option>
+            <option value="contact_enrichment">Contact enrichment</option>
+          </select>
+        </label>
+        <button id="applyOpsFilters" class="primary-button" type="button">Apply filters</button>
+      </div>
+
+      <div class="ops-layout">
+        <aside class="ops-run-list" id="opsRunList"></aside>
+        <section class="ops-detail-panel" id="opsDetailPanel">
+          <div class="detail-placeholder">
+            <h3>Select a run</h3>
+            <p>Choose an ownership swarm run to inspect tasks, artifacts, proposals, validations, and review actions.</p>
+          </div>
+        </section>
+      </div>
+    </section>
+  </div>
+
+  <script src="/static/ops_agents.js" defer></script>
+</body>
+</html>

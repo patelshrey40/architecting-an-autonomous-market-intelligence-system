@@ -1,0 +1,24 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-74.191, 40.729],
+          [-74.181, 40.729],
+          [-74.181, 40.736],
+          [-74.191, 40.736],
+          [-74.191, 40.729]
+        ]]
+      },
+      "properties": {
+        "OBJECTID": 1,
+        "Name": "Broad Street Redevelopment Area",
+        "ShortName": "Broad Street",
+        "Link": "https://example.com/redevelopment/broad-street"
+      }
+    }
+  ]
+}
