@@ -1,3 +1,5 @@
+<img width="1460" height="807" alt="Screenshot 2026-03-30 at 2 11 23 AM" src="https://github.com/user-attachments/assets/6e431600-1bd4-4675-990b-b6dd99cfcceb" />
+
 # Architecting an Autonomous Market Intelligence System
 
 This repository now implements the Newark real-data foundation slice plus a narrow ownership demo from the larger roadmap.
